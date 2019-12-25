@@ -1,0 +1,35 @@
+body{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+#walls{
+    background-color: black;
+    width: 650px;
+    height: 350px;
+    margin: 0 auto;
+    
+}
+
+#frame{
+    background-color: white;
+    width: 600px;
+    height: 300px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+
+#player{
+    background-color: darkgoldenrod;
+    height: 20px;
+    width: 20px;
+    left: 200px;
+    top: 280px;
+    border-radius: 50%;
+    position: absolute;
+}
