@@ -5,6 +5,8 @@ function update(){
 
     Player.checkBoundries();
 
+    Player.walk();
+
     Player.updatePosition();
 
     if (Controller.keyPressed && !Player.jumping){ 
