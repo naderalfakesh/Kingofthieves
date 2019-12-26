@@ -11,7 +11,7 @@ function update(){
 
     if (Controller.keyPressed && !Player.jumping){ 
         console.log("jump")
-        Player.velocity.y = -3 ;
+        Player.velocity.y = -3.5 ;
         Player.jumping = true;
     }
 
@@ -19,6 +19,10 @@ function update(){
         Player.jump();
         Controller.keyPressed = false;
     }
+    if(Player.sliding){
+        Player.slide();
+    }
+    
 
     
     window.requestAnimationFrame(update); // updating animation after calculation is done
