@@ -41,9 +41,10 @@ function update(){
     playerUpdateCss();
     if (Controller.keyPressed && !player.jumping){ 
         console.log("jump")
-        Controller.keyPressed = false;
-        playerJump();
+        player.velocity.y = -3 ;
+        player.jumping = true;
     }
+    if(player.jumping){playerJump();Controller.keyPressed = false;}
     window.requestAnimationFrame(update);
     }
 
@@ -72,7 +73,6 @@ function playerJump(){
     player.velocity.y += enviroment.gravity.y 
     player.velocity.y *= enviroment.friction.air.y 
     player.position.y += player.velocity.y;
-    player.jumping = true;
     
 }
 
@@ -83,5 +83,5 @@ function playerJump(){
 // }
 
 
-window.addEventListener("keypress" , Controller.keyListner )
+window.addEventListener("keypress" ,Controller.keyListner )
 window.requestAnimationFrame(update);
