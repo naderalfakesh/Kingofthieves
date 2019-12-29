@@ -21,7 +21,25 @@ body{
     top: 50%;
     transform: translate(-50%, -50%);
     overflow: hidden;
+    display: grid ; 
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(4,1fr);
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+    grid-template-areas: 
+    "cell-11 cell-12 cell-13 cell-14 cell-15 cell-16 cell-17"
+    "cell-21 cell-22 cell-23 cell-24 cell-25 cell-26 cell-27"
+    "cell-31 cell-32 cell-33 cell-34 cell-35 cell-36 cell-37"
+    "cell-41 cell-42 cell-43 cell-44 cell-45 cell-46 cell-47"
+    ;
+}
 
+
+.block{
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.932);
 }
 
 
@@ -33,4 +51,96 @@ body{
     top: 280px;
     border-radius: 50%;
     position: absolute;
+}
+
+ /* first row */
+.cell-11{
+    grid-area: cell-11;
+}
+.cell-12{
+    grid-area: cell-12;
+}
+.cell-13{
+    grid-area: cell-13;
+}
+.cell-14{
+    grid-area: cell-14;
+}
+.cell-15{
+    grid-area: cell-15;
+}
+.cell-16{
+    grid-area: cell-16;
+}
+.cell-17{
+    grid-area: cell-17;
+}
+
+/* second row */
+.cell-21{
+    grid-area: cell-21;
+}
+.cell-22{
+    grid-area: cell-22;
+}
+.cell-23{
+    grid-area: cell-23;
+}
+.cell-24{
+    grid-area: cell-24;
+}
+.cell-25{
+    grid-area: cell-25;
+}
+.cell-26{
+    grid-area: cell-26;
+}
+.cell-27{
+    grid-area: cell-27;
+}
+
+/* second row */
+.cell-31{
+    grid-area: cell-31;
+}
+.cell-32{
+    grid-area: cell-32;
+}
+.cell-33{
+    grid-area: cell-33;
+}
+.cell-34{
+    grid-area: cell-34;
+}
+.cell-35{
+    grid-area: cell-35;
+}
+.cell-36{
+    grid-area: cell-36;
+}
+.cell-37{
+    grid-area: cell-37;
+}
+
+/* second row */
+.cell-41{
+    grid-area: cell-41;
+}
+.cell-42{
+    grid-area: cell-42;
+}
+.cell-43{
+    grid-area: cell-43;
+}
+.cell-44{
+    grid-area: cell-44;
+}
+.cell-45{
+    grid-area: cell-45;
+}
+.cell-46{
+    grid-area: cell-46;
+}
+.cell-47{
+    grid-area: cell-47;
 }

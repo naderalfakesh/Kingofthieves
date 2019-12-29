@@ -1,7 +1,7 @@
 const Controller = {
     keyPressed : false,
     keyListner: function(event){
-        if(event.code == "Space"){
+        if(event.code == "Space" ){
             Controller.keyPressed = true;
         }
     }
