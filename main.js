@@ -1,8 +1,11 @@
 import Controller from "./Controller.js";
 import Player from "./Player.js";
+import Enviroment from "./Enviroment.js";
 
 Player.position.x = 0;
 Player.position.y = 225;
+
+Enviroment.start();
 
 function update(){
 
@@ -10,7 +13,6 @@ function update(){
 
     if(Controller.keyPressed && !Player.jumping){
         Player.jumping = true;
-        console.log("jumbing")
     }
     if(Controller.keyPressed && Player.sliding ){
         Player.bouncing = true;
