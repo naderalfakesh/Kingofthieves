@@ -25,11 +25,30 @@ const Player = {
     sliding: false,
     bouncing: false,
 
+    collision:{
+        bottom: false,
+        top: false,
+        left: false,
+        right: false
+    },
+
     // functions
 
     move: function() {
-        const collision = this.collisionCheck();
-        if (collision !== "l" || collision !== "r") {
+        this.collisionCheck();
+
+        if (!(this.collision.bottom || this.collision.top)) {
+            // emulate gravity buy adding value at y axis
+            Player.velocity.y += Enviroment.gravity.y;
+            // emulate frictoin in air buy adding value at y axis
+            Player.velocity.y *= Enviroment.friction.air.y;
+            // Player.velocity.x *= Enviroment.friction.air.x;
+            // saving old position
+            Player.previousPosition.y = Player.position.y;
+            // updating position on y axis
+            Player.position.y += Player.velocity.y;
+        }
+        if (!this.collision.left || !this.collision.right) {
             
             // saving last position
             Player.previousPosition.x = Player.position.x;
@@ -39,6 +58,7 @@ const Player = {
     },
 
     jump: function() {
+        
         if (Player.bouncing) {
             Player.velocity.y = Player.speed.y;
         }
@@ -79,8 +99,8 @@ const Player = {
             Enviroment.$frame.width() - Player.htmlElement.width();
 
         if (Bottom) {
-            Player.position.y =
-                Enviroment.$frame.height() - Player.htmlElement.height();
+            // Player.position.y =
+            //     Enviroment.$frame.height() - Player.htmlElement.height();
             // Reset movement state
             Player.moving = true;
             Player.jumping = false;
@@ -107,17 +127,23 @@ const Player = {
         }
     },
     collisionCheck: function() {
-        if (false) {
-            return "b";
-        } else if (false) {
-            return "t";
-        } else if (false) {
-            return "r";
-        } else if (false) {
-            return "l";
-        } else {
-            return "in the air";
+        const Bottom =
+            Player.position.y >=
+            Enviroment.$frame.height() - Player.htmlElement.height();
+        const Top= false;
+        const Left= false;
+        const Right= false;
+        
+        if (Bottom) {
+            this.collision.bottom = true;
+        } else if (Top) {
+            this.collision.top = true;;
+        } else if (Left) {
+            this.collision.left = true;;
+        } else if (Right) {
+            this.collision.right = true;;
         }
+
     },
 
     updatePosition: function() {

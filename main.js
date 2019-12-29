@@ -4,6 +4,8 @@ import Enviroment from "./Enviroment.js";
 
 Player.position.x = 0;
 Player.position.y = 225;
+Player.velocity.y = 0;
+
 
 Enviroment.start();
 
@@ -13,6 +15,7 @@ function update(){
 
     if(Controller.keyPressed && !Player.jumping){
         Player.jumping = true;
+        Player.velocity.y = Player.speed.y
     }
     if(Controller.keyPressed && Player.sliding ){
         Player.bouncing = true;
@@ -31,10 +34,10 @@ function update(){
         Player.bounce();
     }
     
-    if(!(Player.jumping || Player.sliding || Player.bouncing ) ){
-        Player.velocity.x = Player.velocity.x
-        Player.velocity.y = Player.speed.y
-    }
+    // if(!(Player.jumping || Player.sliding || Player.bouncing ) ){
+    //     Player.velocity.x = Player.velocity.x
+    //     Player.velocity.y = Player.speed.y
+    // }
 
     Player.updatePosition();
     Controller.keyPressed = false;
