@@ -13,9 +13,9 @@ function update(){
 
     Player.checkBoundries();
 
-    if(Controller.keyPressed && !Player.jumping){
+    if(Controller.keyPressed && !Player.jumping && Player.collision.bottom){
         Player.jumping = true;
-        Player.velocity.y = Player.speed.y
+        Player.velocity.y = Player.speed.y;
     }
     if(Controller.keyPressed && Player.sliding ){
         Player.bouncing = true;

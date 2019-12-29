@@ -25,7 +25,7 @@ const Player = {
     sliding: false,
     bouncing: false,
 
-    collision:{
+    collision: {
         bottom: false,
         top: false,
         left: false,
@@ -36,8 +36,29 @@ const Player = {
 
     move: function() {
         this.collisionCheck();
-
         if (!(this.collision.bottom || this.collision.top)) {
+            // emulate gravity buy adding value at y axis
+            this.velocity.y += Enviroment.gravity.y;
+            // emulate frictoin in air buy adding value at y axis
+            this.velocity.y *= Enviroment.friction.air.y;
+            // this.velocity.x *= Enviroment.friction.air.x;
+            // saving old position
+            this.previousPosition.y = this.position.y;
+            // updating position on y axis
+            this.position.y += this.velocity.y;
+        }
+        if (!(this.collision.left && this.collision.right)) {
+            // saving last position
+            this.previousPosition.x = this.position.x;
+            // move along x Axis
+            this.position.x += this.velocity.x;
+        }
+    },
+
+    jump: function() {
+            if (Player.bouncing) {
+                Player.velocity.y = Player.speed.y;
+            }
             // emulate gravity buy adding value at y axis
             Player.velocity.y += Enviroment.gravity.y;
             // emulate frictoin in air buy adding value at y axis
@@ -47,30 +68,6 @@ const Player = {
             Player.previousPosition.y = Player.position.y;
             // updating position on y axis
             Player.position.y += Player.velocity.y;
-        }
-        if (!this.collision.left || !this.collision.right) {
-            
-            // saving last position
-            Player.previousPosition.x = Player.position.x;
-            // move along x Axis
-            Player.position.x += Player.velocity.x;
-        }
-    },
-
-    jump: function() {
-        
-        if (Player.bouncing) {
-            Player.velocity.y = Player.speed.y;
-        }
-        // emulate gravity buy adding value at y axis
-        Player.velocity.y += Enviroment.gravity.y;
-        // emulate frictoin in air buy adding value at y axis
-        Player.velocity.y *= Enviroment.friction.air.y;
-        // Player.velocity.x *= Enviroment.friction.air.x;
-        // saving old position
-        Player.previousPosition.y = Player.position.y;
-        // updating position on y axis
-        Player.position.y += Player.velocity.y;
     },
     slide: function() {
         if (Player.velocity.y >= 0) {
@@ -130,20 +127,19 @@ const Player = {
         const Bottom =
             Player.position.y >=
             Enviroment.$frame.height() - Player.htmlElement.height();
-        const Top= false;
-        const Left= false;
-        const Right= false;
-        
+        const Top = false;
+        const Left = false;
+        const Right = false;
+
         if (Bottom) {
             this.collision.bottom = true;
         } else if (Top) {
-            this.collision.top = true;;
+            this.collision.top = true;
         } else if (Left) {
-            this.collision.left = true;;
+            this.collision.left = true;
         } else if (Right) {
-            this.collision.right = true;;
+            this.collision.right = true;
         }
-
     },
 
     updatePosition: function() {
