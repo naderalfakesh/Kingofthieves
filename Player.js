@@ -35,8 +35,10 @@ const Player = {
     // functions
 
     move: function() {
+        // check collision before updating position
         this.collisionCheck();
-        if (!(this.collision.bottom || this.collision.top)) {
+        // If there is no collision at bottom or top then move on Y axis
+        if ((!(this.collision.bottom || this.collision.top))||this.jumping) {
             // emulate gravity buy adding value at y axis
             this.velocity.y += Enviroment.gravity.y;
             // emulate frictoin in air buy adding value at y axis
@@ -47,27 +49,26 @@ const Player = {
             // updating position on y axis
             this.position.y += this.velocity.y;
         }
-        if (!(this.collision.left && this.collision.right)) {
+ 
+        //If there is no collison on right or left then move on Xaxis
+        if (!this.collision.left && !this.collision.right ) {
             // saving last position
             this.previousPosition.x = this.position.x;
             // move along x Axis
             this.position.x += this.velocity.x;
         }
+
+        
     },
 
     jump: function() {
-            if (Player.bouncing) {
-                Player.velocity.y = Player.speed.y;
-            }
-            // emulate gravity buy adding value at y axis
-            Player.velocity.y += Enviroment.gravity.y;
-            // emulate frictoin in air buy adding value at y axis
-            Player.velocity.y *= Enviroment.friction.air.y;
-            // Player.velocity.x *= Enviroment.friction.air.x;
-            // saving old position
-            Player.previousPosition.y = Player.position.y;
-            // updating position on y axis
-            Player.position.y += Player.velocity.y;
+        this.jumping = true;
+        this.velocity.y = this.speed.y;
+        if(this.sliding){
+            this.bouncing = true;
+            this.bounce(); 
+            this.bouncing = false;
+        }
     },
     slide: function() {
         if (Player.velocity.y >= 0) {
@@ -76,77 +77,45 @@ const Player = {
         }
     },
 
-    bounce: function() {
-        if (Player.position.x <= 0) {
-            Player.velocity.x = Math.abs(Player.speed.x);
-        } else {
-            Player.velocity.x = -Math.abs(Player.speed.x);
-        }
+    bounce: function() {  
+        Player.velocity.x = -Player.velocity.x ;
         Player.sliding = false;
         Player.bouncing = false;
     },
 
-    checkBoundries: function() {
-        const Bottom =
-            Player.position.y >
-            Enviroment.$frame.height() - Player.htmlElement.height();
-        const Left = Player.position.x <= 0;
-        const Right =
-            Player.position.x >=
-            Enviroment.$frame.width() - Player.htmlElement.width();
-
-        if (Bottom) {
-            // Player.position.y =
-            //     Enviroment.$frame.height() - Player.htmlElement.height();
-            // Reset movement state
-            Player.moving = true;
-            Player.jumping = false;
-            Player.sliding = false;
-            Player.bouncing = false;
-            // Reset Velocity on axis x
-            if (Player.velocity.x >= 0) {
-                Player.velocity.x = Math.abs(Player.speed.x);
-            }
-            if (Player.velocity.x < 0) {
-                Player.velocity.x = -Math.abs(Player.speed.x);
-            }
-        }
-
-        if (Left) {
-            Player.position.x = 1;
-        }
-        if (Right) {
-            Player.position.x =
-                -1 + Enviroment.$frame.width() - Player.htmlElement.width();
-        }
-        if ((Left || Right) && Player.jumping && Player.velocity.y > 0) {
-            Player.sliding = true;
-        }
-    },
     collisionCheck: function() {
-        const Bottom =
-            Player.position.y >=
-            Enviroment.$frame.height() - Player.htmlElement.height();
-        const Top = false;
-        const Left = false;
-        const Right = false;
-
-        if (Bottom) {
-            this.collision.bottom = true;
-        } else if (Top) {
-            this.collision.top = true;
-        } else if (Left) {
-            this.collision.left = true;
-        } else if (Right) {
-            this.collision.right = true;
+        this.collision.bottom =
+            this.position.y >=
+            Enviroment.$frame.height() - this.htmlElement.height();
+        this.collision.top = this.position.y <= 0;
+        this.collision.left = this.position.x <= 0;
+        this.collision.right = this.position.x >=
+        Enviroment.$frame.width() - this.htmlElement.width(); 
+ 
+        if(this.collision.left){
+            this.position.x += 1;
         }
+        if(this.collision.right){
+            this.position.x -= 1;
+        }
+        console.log(this.collision.bottom)
+        if(this.collision.bottom){
+            this.position.y  = Enviroment.$frame.height() - this.htmlElement.height();
+            //<<<<<<<<<<< this.jumping = false; >>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<
+            this.sliding = false;
+        }
+
+        if ((this.collision.left || this.collision.right) && this.jumping && this.velocity.y >= 0) {
+            this.sliding = true;
+        }
+
     },
 
     updatePosition: function() {
         // assign x and y coordinate to html top and left properities
-        Player.htmlElement.css({
-            left: Player.position.x + "px",
-            top: Player.position.y + "px"
+        this.htmlElement.css({
+            left: this.position.x + "px",
+            top: this.position.y + "px"
         });
     }
 };

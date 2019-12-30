@@ -2,7 +2,7 @@ import Controller from "./Controller.js";
 import Player from "./Player.js";
 import Enviroment from "./Enviroment.js";
 
-Player.position.x = 0;
+Player.position.x = 1;
 Player.position.y = 225;
 Player.velocity.y = 0;
 
@@ -11,22 +11,21 @@ Enviroment.start();
 
 function update(){
 
-    Player.checkBoundries();
+    // Player.checkBoundries();
 
-    if(Controller.keyPressed && !Player.jumping && Player.collision.bottom){
-        Player.jumping = true;
-        Player.velocity.y = Player.speed.y;
-    }
-    if(Controller.keyPressed && Player.sliding ){
-        Player.bouncing = true;
-    }
 
-    if(Player.moving){
-        Player.move();
-    }
-    if(Player.jumping){
+    if(Controller.keyPressed && (Player.collision.bottom || Player.collision.left || Player.collision.right )){
         Player.jump();
     }
+    // if(Controller.keyPressed && Player.sliding ){
+    //     Player.bouncing = true;
+    //     Player.jump();
+    // }
+
+    Player.move();
+
+    
+    
     if(Player.sliding){
         Player.slide();
     }
