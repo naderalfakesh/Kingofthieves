@@ -3,42 +3,23 @@ import Player from "./Player.js";
 import Enviroment from "./Enviroment.js";
 
 Player.position.x = 1;
-Player.position.y = 225;
+Player.position.y = 190;
 Player.velocity.y = 0;
 
 
 Enviroment.start();
+Enviroment.fillBlocks();
 
 function update(){
-
-    // Player.checkBoundries();
-
 
     if(Controller.keyPressed && (Player.collision.bottom || Player.collision.left || Player.collision.right )){
         Player.jump();
     }
-    // if(Controller.keyPressed && Player.sliding ){
-    //     Player.bouncing = true;
-    //     Player.jump();
-    // }
 
     Player.move();
-
     
-    
-    if(Player.sliding){
-        Player.slide();
-    }
-    if(Player.bouncing){
-        Player.bounce();
-    }
-    
-    // if(!(Player.jumping || Player.sliding || Player.bouncing ) ){
-    //     Player.velocity.x = Player.velocity.x
-    //     Player.velocity.y = Player.speed.y
-    // }
-
     Player.updatePosition();
+
     Controller.keyPressed = false;
     
     if(Player.bouncing){
@@ -53,7 +34,19 @@ function update(){
     else if(Player.move){
         Player.htmlElement.css("background-color","purple");
     }
-
+    
+    $("#top").text(Player.collision.top);
+    $("#bottom").text(Player.collision.bottom);
+    $("#left").text(Player.collision.left);
+    $("#right").text(Player.collision.right);
+    $("#jump").text(Player.jumping);
+    $("#move").text(Player.moving);
+    $("#bounce").text(Player.bouncing);
+    $("#slide").text(Player.sliding);
+    $("#Vx").text(parseInt(Player.velocity.x));
+    $("#Vy").text(parseInt(Player.velocity.y));
+    $("#X").text(parseInt(Player.position.x));
+    $("#Y").text(parseInt(Player.position.y));
     window.requestAnimationFrame(update); // updating animation after calculation is done
     }
 

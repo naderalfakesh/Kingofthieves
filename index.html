@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="./main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
     
@@ -14,11 +14,43 @@
     <div id="walls">
         <div id="frame">
             <div id="player"></div>
-
+            <!-- blocks will be incected from JS side -->
         </div>
     </div>
+    <div>
+        <table>
+            <tr>
+                <th>top</th>
+                <th>btm</th>
+                <th>lft</th>
+                <th>rght</th>
+                <th>jump</th>
+                <th>move</th>
+                <th>bounce</th>
+                <th>slide</th>
+                <th>Vx</th>
+                <th>Vy</th>
+                <th>X</th>
+                <th>Y</th>
+            </tr>
+            <tr>
+                <td id="top"> </td>
+                <td id="bottom"> </td>
+                <td id="left"> </td>
+                <td id="right"> </td>
+                <td id="jump"> </td>
+                <td id="move"> </td>
+                <td id="bounce"> </td>
+                <td id="slide"> </td>
+                <td id="Vx"> </td>
+                <td id="Vy"> </td>
+                <td id="X"> </td>
+                <td id="Y"> </td>
+            </tr>
+        </table>
+    </div>
     
-    <script src="main.js" type="module"></script>
+    <script src="./main.js" type="module"></script>
     <!-- <script src="pure.js"></script> -->
 </body>
 </html>

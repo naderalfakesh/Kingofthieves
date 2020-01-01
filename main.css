@@ -144,3 +144,13 @@ body{
 .cell-47{
     grid-area: cell-47;
 }
+
+table{
+    margin: 0 auto;
+}
+td,th{
+    padding: 5px 10px;
+}
+th{
+    text-transform: uppercase;
+}
