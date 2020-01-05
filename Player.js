@@ -1,5 +1,6 @@
 import Enviroment from "./Enviroment.js";
 import Controller from "./Controller.js";
+import "./js/jquery.overlap.min.js";
 
 const Player = {
     // constants
@@ -71,7 +72,7 @@ const Player = {
             this.position.x += this.velocity.x;
         }
         // check collision after updating position
-        this.collisionCheck();
+        // this.collisionCheck();
     },
 
     jump: function() {
@@ -84,7 +85,9 @@ const Player = {
         }
     },
     slide: function() {
+            this.velocity.y = -this.speed.y;
         this.position.y += this.velocity.y * Enviroment.friction.ground.y;
+        
     },
 
     bounce: function() {
@@ -94,20 +97,25 @@ const Player = {
     },
 
     collisionCheck: function() {
-        const blockcoll= this.blocksCollision();
+
+        const blockcoll = this.blocksCollision();
+        
         const bottom =
-            this.position.y >=
-            Enviroment.$frame.height() - this.htmlElement.height();
+            this.position.y >
+            Math.round(Enviroment.$frame.height() - this.htmlElement.height());
+
         const top = this.position.y <= 0;
-        const left = this.position.x <= 1;
+
+        const left = this.position.x <= 0;
+
         const right =
             this.position.x >=
             -1 + Enviroment.$frame.width() - this.htmlElement.width();
 
-        this.collision.top = blockcoll.top || top
-        this.collision.left = blockcoll.left || left
-        this.collision.bottom = blockcoll.bottom || bottom
-        this.collision.right = blockcoll.right || right
+        this.collision.top = blockcoll.top || top;
+        this.collision.left = blockcoll.left || left;
+        this.collision.bottom = blockcoll.bottom || bottom;
+        this.collision.right = blockcoll.right || right;
         if (this.collision.left) {
             // this.position.x += 1;
         }
@@ -115,13 +123,19 @@ const Player = {
             // this.position.x -= 1;
         }
         // console.log(this.collision.bottom)
+        if (bottom) {
+            this.position.y =
+                Math.round(
+                    Enviroment.$frame.height() - this.htmlElement.height()
+                ) + 0.5;
+        }
+        if (this.collision.top) {
+            this.velocity.y = - 0.3*this.speed.y;
+        }
         if (this.collision.bottom) {
-            // this.position.y =
-            //     Enviroment.$frame.height() - this.htmlElement.height();
             this.jumping = false;
             this.sliding = false;
         }
-
         if (
             (this.collision.left || this.collision.right) &&
             this.jumping &&
@@ -129,56 +143,75 @@ const Player = {
         ) {
             this.sliding = true;
         }
-
-       
+        if(!(this.collision.left || this.collision.right) && this.sliding){
+            this.sliding = false;
+            this.velocity.y =  -0.2*this.speed.y;
+        }
     },
-    blocksCollision: function(){
-        const result = {top:false ,left:false ,bottom:false , right: false }
-        Enviroment.blocks.map(
-            (item,i) => {
-                if( (Math.round(this.position.x) + this.width >= item.left-0.5 &&
-                    Math.round(this.position.x) + this.width < item.left+0.5) &&
-                    this.velocity.x > 0
-                    && Math.round(this.position.y) >= item.top &&
-                     Math.round(this.position.y) <= (item.top + item.height) ){
-                    // console.log(i,"left collision")
-                    result.right = true;
-                    this.position.x = item.left -this.width;
-                }
-                if(this.position.x <= 77 && this.position.x > 75 && this.velocity.x <0){
-                    console.log("nader")
-                }
-                if( (Math.round(this.position.x)  >= item.left+item.width-0.5 &&
-                    Math.round(this.position.x)  < item.left+item.width+0.5) &&
-                    this.velocity.x < 0
-                    && Math.round(this.position.y) >= item.top &&
-                     Math.round(this.position.y) <= (item.top + item.height) ){
-                    // console.log(i,"right collision")
-                    result.left = true; 
-                    this.position.x =  item.left + item.width;
-                }
-                if(Math.round(this.position.y) + this.height >= item.top - 1 &&
-                    Math.round(this.position.y) + this.height < item.top + 1 &&
-                    this.velocity.y > 0 &&
-                    Math.round(this.position.x) <= item.left+item.width-0.5 &&
-                    Math.round(this.position.x) >= item.left+0.5  ){
-                    result.bottom = true; 
-                    this.position.y = item.top -  this.height;
-                    // console.log(i,"bottom collision" ,this.position.y ,item.top ,this.position.x ,item.left+item.width)
+    blocksCollision: function() {
+        let result = { top: false, left: false, bottom: false, right: false };
+        const xEdge = 2;
+        const yEdge = 0.5;
+        const playerBottom = this.position.y + this.height;
+        const playerRight = this.position.x + this.width;
+        const playerYCenter = this.position.y + 0.5 * this.height;
+        const playerXCenter = this.position.x + 0.5 * this.width;
+        const playerTop = this.position.y;
+        const playerLeft = this.position.x;
 
-                }
-                if(Math.round(this.position.y)  >= item.top+item.height - 1 &&
-                    Math.round(this.position.y)  < item.top+item.height - 1 &&
-                    this.velocity.y < 0 &&
-                    Math.round(this.position.x) > item.left+item.width &&
-                    Math.round(this.position.x) < item.left){
-                    result.top = true; 
-                    this.position.y = item.top+item.height;
+        Enviroment.blocks.forEach((item, i) => {
+            const itemBottom = item.top + item.height;
+            const itemRight = item.left + item.width;
 
-                }
-                
-            });
-            return result;
+            // checking collision between player right and block
+            if (
+                playerRight >= item.left &&
+                this.previousPosition.x + this.width < item.left &&
+                this.velocity.x > 0 &&
+                playerYCenter >= item.top &&
+                playerYCenter <= itemBottom
+            ) {
+                result.right = true;
+            }
+
+            // checking collision between player left and block
+            if (
+                playerLeft < itemRight &&
+                this.previousPosition.x > itemRight &&
+                this.velocity.x < 0 &&
+                playerYCenter >= item.top &&
+                playerYCenter <= itemBottom
+            ) {
+                result.left = true;
+            }
+
+            // checking collision between player bottom and block
+            if (
+                playerBottom >= item.top &&
+                this.previousPosition.y + this.height < item.top &&
+                this.velocity.y > 0 &&
+                playerXCenter <= item.left + item.width &&
+                playerXCenter >= item.left
+            ) {
+                result.bottom = true;
+            }
+            
+            if (
+                playerTop <= itemBottom &&
+                this.previousPosition.y > itemBottom &&
+                this.velocity.y < 0 &&
+                playerXCenter <= item.left + item.width &&
+                playerXCenter >= item.left
+            ) {
+                result.top = true;
+            }
+        });
+        return {
+            top: result.top,
+            left: result.left,
+            bottom: result.bottom,
+            right: result.right
+        };
     },
     updatePosition: function() {
         // assign x and y coordinate to html top and left properities

@@ -1,6 +1,8 @@
 import Controller from "./Controller.js";
 import Player from "./Player.js";
 import Enviroment from "./Enviroment.js";
+// import  "./js/jquery.overlap.min.js";
+
 
 Player.position.x = 1;
 Player.position.y = 190;
@@ -12,13 +14,16 @@ Enviroment.fillBlocks();
 
 function update(){
 
+    Player.updatePosition();
+
+    Player.collisionCheck();
+
     if(Controller.keyPressed && (Player.collision.bottom || Player.collision.left || Player.collision.right )){
         Player.jump();
     }
 
     Player.move();
     
-    Player.updatePosition();
 
     Controller.keyPressed = false;
     

@@ -39,7 +39,7 @@ body{
     margin: 0;
     padding: 0;
     border: none;
-    background-color: rgba(0, 0, 0, 0.932);
+    background-color: rgba(1, 124, 63, 0.932);
 }
 
 
@@ -153,4 +153,8 @@ td,th{
 }
 th{
     text-transform: uppercase;
+}
+
+.red{
+    background-color: red;
 }
