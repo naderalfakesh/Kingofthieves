@@ -73,7 +73,7 @@ body{
  }
 
  @keyframes play {
-    100% { background-position: -640px 0; }
+    100% { background-position: -160px 0; }
  }
 
  
