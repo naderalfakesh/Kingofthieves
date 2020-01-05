@@ -59,6 +59,6 @@ function update(){
  
 
 // listening for jump key press
-window.addEventListener("keypress" ,Controller.keyListner )
+window.addEventListener("keydown" ,Controller.keyListner )
 // requesting animation frame
 window.requestAnimationFrame(update);

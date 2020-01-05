@@ -16,12 +16,12 @@ const Player = {
         y: 280
     },
     velocity: {
-        x: 1.5,
-        y: -3.5
+        x: 2.2,
+        y: -4.5
     },
     speed: {
-        x: 1.5,
-        y: -3.5
+        x: 2.2,
+        y: -4.5
     },
     moving: true,
     jumping: false,
@@ -70,6 +70,9 @@ const Player = {
             this.previousPosition.x = this.position.x;
             // move along x Axis
             this.position.x += this.velocity.x;
+            if(this.jumping){
+                this.position.x += 0.1*this.velocity.x;
+            }
         }
         // check collision after updating position
         // this.collisionCheck();
@@ -138,7 +141,7 @@ const Player = {
         }
         if (
             (this.collision.left || this.collision.right) &&
-            this.jumping &&
+            (this.jumping || !this.collision.bottom) &&
             this.velocity.y >= 0
         ) {
             this.sliding = true;
@@ -151,11 +154,9 @@ const Player = {
     blocksCollision: function() {
         let result = { top: false, left: false, bottom: false, right: false };
         const xEdge = 2;
-        const yEdge = 0.5;
+        const yEdge = 5;
         const playerBottom = this.position.y + this.height;
         const playerRight = this.position.x + this.width;
-        const playerYCenter = this.position.y + 0.5 * this.height;
-        const playerXCenter = this.position.x + 0.5 * this.width;
         const playerTop = this.position.y;
         const playerLeft = this.position.x;
 
@@ -168,21 +169,24 @@ const Player = {
                 playerRight >= item.left &&
                 this.previousPosition.x + this.width < item.left &&
                 this.velocity.x > 0 &&
-                playerYCenter >= item.top &&
-                playerYCenter <= itemBottom
+                playerBottom-yEdge >= item.top &&
+                playerTop+yEdge <= itemBottom
             ) {
                 result.right = true;
+                this.position.x = item.left - this.width
             }
 
             // checking collision between player left and block
             if (
-                playerLeft < itemRight &&
+                playerLeft <= itemRight &&
                 this.previousPosition.x > itemRight &&
                 this.velocity.x < 0 &&
-                playerYCenter >= item.top &&
-                playerYCenter <= itemBottom
+                playerBottom-yEdge >= item.top &&
+                playerTop+yEdge <= itemBottom
             ) {
                 result.left = true;
+                this.position.x = itemRight;
+
             }
 
             // checking collision between player bottom and block
@@ -190,20 +194,23 @@ const Player = {
                 playerBottom >= item.top &&
                 this.previousPosition.y + this.height < item.top &&
                 this.velocity.y > 0 &&
-                playerXCenter <= item.left + item.width &&
-                playerXCenter >= item.left
+                playerLeft+xEdge <= item.left + item.width &&
+                playerRight-xEdge >= item.left
             ) {
                 result.bottom = true;
+                this.position.y = item.top - this.height;
+
             }
             
             if (
                 playerTop <= itemBottom &&
                 this.previousPosition.y > itemBottom &&
                 this.velocity.y < 0 &&
-                playerXCenter <= item.left + item.width &&
-                playerXCenter >= item.left
+                playerLeft+xEdge <= item.left + item.width &&
+                playerRight-xEdge >= item.left
             ) {
                 result.top = true;
+                this.position.y = itemBottom;
             }
         });
         return {
@@ -213,6 +220,23 @@ const Player = {
             right: result.right
         };
     },
+
+    blockCollisionRight: function(item) {
+        const playerRight = this.position.x + this.width;
+        const playerYCenter = this.position.y + 0.5 * this.height;
+        const itemBottom = item.top + item.height;
+        if (
+            playerRight >= item.left &&
+            this.previousPosition.x + this.width < item.left &&
+            this.velocity.x > 0 &&
+            playerYCenter >= item.top &&
+            playerYCenter <= itemBottom
+        ) {
+            return true;
+        }
+    },
+
+
     updatePosition: function() {
         // assign x and y coordinate to html top and left properities
         this.htmlElement.css({

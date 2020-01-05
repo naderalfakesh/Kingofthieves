@@ -9,6 +9,8 @@ body{
     width: 650px;
     height: 350px;
     margin: 0 auto;
+    background-image: url("./img/grassCenter.png");
+    background-repeat: repeat;
     
 }
 
@@ -39,7 +41,11 @@ body{
     margin: 0;
     padding: 0;
     border: none;
-    background-color: rgba(1, 124, 63, 0.932);
+    /* background-color: rgba(1, 124, 63, 0.932); */
+    background-image: url("./img/grassCenter.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 

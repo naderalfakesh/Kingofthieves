@@ -1,15 +1,15 @@
 const Enviroment = {
     $frame: $("#frame"),
-    gravity: { x: 0, y: 0.09 },
+    gravity: { x: 0, y: 0.15 },
     friction: {
         air: { x: 0.99, y: 0.99 },
-        ground: { x: 0, y: -0.75 }
+        ground: { x: 0, y: -0.8 }
     },
     grid: [
         [0, 0, 0, 0, 0, 0, 0],
         [0, 1, 1, 0, 1, 1, 0], 
-        [0, 0, 0, 0, 0, 1, 0],
-        [1, 1, 0, 0, 0, 0, 0]
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0]
     ],
     blocks: [],
     start: function() {
@@ -36,7 +36,6 @@ const Enviroment = {
                 height: $(block).height(),
             })
         });
-        console.log(this.blocks)
     }
 };
 
