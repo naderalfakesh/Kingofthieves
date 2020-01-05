@@ -104,8 +104,8 @@ const Player = {
         const blockcoll = this.blocksCollision();
         
         const bottom =
-            this.position.y >
-            Math.round(Enviroment.$frame.height() - this.htmlElement.height());
+            this.position.y >=
+             Enviroment.$frame.height() - this.htmlElement.height() ;
 
         const top = this.position.y <= 0;
 
@@ -113,24 +113,20 @@ const Player = {
 
         const right =
             this.position.x >=
-            -1 + Enviroment.$frame.width() - this.htmlElement.width();
+         Enviroment.$frame.width() - this.htmlElement.width();
 
         this.collision.top = blockcoll.top || top;
         this.collision.left = blockcoll.left || left;
         this.collision.bottom = blockcoll.bottom || bottom;
         this.collision.right = blockcoll.right || right;
-        if (this.collision.left) {
-            // this.position.x += 1;
+        if (left) {
+            this.position.x = 0;
         }
-        if (this.collision.right) {
-            // this.position.x -= 1;
+        if (right) {
+            this.position.x = Enviroment.$frame.width() - this.htmlElement.width();
         }
-        // console.log(this.collision.bottom)
         if (bottom) {
-            this.position.y =
-                Math.round(
-                    Enviroment.$frame.height() - this.htmlElement.height()
-                ) + 0.5;
+            this.position.y = Enviroment.$frame.height() - this.htmlElement.height() ;
         }
         if (this.collision.top) {
             this.velocity.y = - 0.3*this.speed.y;

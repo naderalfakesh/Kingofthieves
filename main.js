@@ -18,28 +18,40 @@ function update(){
 
     Player.collisionCheck();
 
-    if(Controller.keyPressed && (Player.collision.bottom || Player.collision.left || Player.collision.right )){
-        Player.jump();
+    if(Player.jumping && !Player.sliding){
+        Controller.keyPressed = false;
+    }
+    if(Controller.keyPressed && (Player.collision.bottom || Player.collision.left || Player.collision.right ) ){
+        
+            Player.jump();
+        
+        Controller.keyPressed = false;
     }
 
     Player.move();
     
-
-    Controller.keyPressed = false;
+ 
     
     if(Player.bouncing){
-        Player.htmlElement.css("background-color","red");
+        // Player.htmlElement.css("background-color","red");
     }
     else if(Player.sliding){
-        Player.htmlElement.css("background-color","blue");
+        // Player.htmlElement.css("background-color","blue");
     }
     else if(Player.jumping){
-        Player.htmlElement.css("background-color","green");
+        // Player.htmlElement.css("background-color","green");
     }
     else if(Player.move){
-        Player.htmlElement.css("background-color","purple");
+        // Player.htmlElement.css("background-color","purple");
     }
     
+    if(Player.velocity.x < 0){
+        Player.htmlElement.addClass("flipped");
+    }
+    else{
+        Player.htmlElement.removeClass("flipped");    
+    }
+
     $("#top").text(Player.collision.top);
     $("#bottom").text(Player.collision.bottom);
     $("#left").text(Player.collision.left);
