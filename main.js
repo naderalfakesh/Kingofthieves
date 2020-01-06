@@ -1,6 +1,7 @@
 import Controller from "./Controller.js";
 import Player from "./Player.js";
 import Enviroment from "./Enviroment.js";
+import Enemy from "./enemy.js";
 // import  "./js/jquery.overlap.min.js";
 
 
@@ -29,6 +30,7 @@ function update(){
     }
 
     Player.move();
+    Enemy.move();
     
  
     
