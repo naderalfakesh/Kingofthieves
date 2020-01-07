@@ -30,7 +30,8 @@ function update(){
     }
 
     Player.move();
-    Enemy.move();
+    // Enemy.move();
+    Enemy.moveY(0);
     
  
     
