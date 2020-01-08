@@ -82,15 +82,23 @@ body{
     animation: play 1s steps(8) infinite;
 }
 
-#enemy{
+.enemy{ 
+    position: absolute;
     height: 20px;
     width: 20px;
     left: 0px;
     top: 0px;
-    position: absolute;
-    background-color: blueviolet; 
-    
 }
+.enemy#first{
+    background-color: blueviolet; 
+}
+.enemy#second{
+    background-color: cornflowerblue; 
+}
+.enemy#third{
+    background-color: darkgreen; 
+}
+
 
 
  /* first row */
@@ -196,5 +204,5 @@ th{
 }
 
 .red{
-    background-color: red;
+    background-color: red !important;
 }

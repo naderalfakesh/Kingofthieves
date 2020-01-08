@@ -1,6 +1,5 @@
 import Enviroment from "./Enviroment.js";
 import Controller from "./Controller.js";
-import "./js/jquery.overlap.min.js";
 
 const Player = {
     // constants

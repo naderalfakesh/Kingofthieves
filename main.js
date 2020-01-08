@@ -1,9 +1,15 @@
 import Controller from "./Controller.js";
 import Player from "./Player.js";
 import Enviroment from "./Enviroment.js";
-import Enemy from "./enemy.js";
+import Enemy from "./Enemies.js";
 // import  "./js/jquery.overlap.min.js";
 
+const Enemy1 = new Enemy("first");
+const Enemy2 = new Enemy("second",20,20,200,150,2,1,2);
+const Enemy3 = new Enemy("third",20,20,50,50,3,2,3);
+Enemy1.createHtmlEnemy();
+Enemy2.createHtmlEnemy();
+Enemy3.createHtmlEnemy();
 
 Player.position.x = 1;
 Player.position.y = 190;
@@ -30,8 +36,10 @@ function update(){
     }
 
     Player.move();
-    // Enemy.move();
-    Enemy.moveY(0);
+    Enemy1.moveY();
+    Enemy2.moveY();
+    Enemy3.moveX();
+    // if(Enemy3.overlap()[0]){alert("crash")};
     
  
     
