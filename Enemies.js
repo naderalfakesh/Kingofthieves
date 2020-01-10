@@ -76,12 +76,7 @@ const Enemy = function (
         this.updatePosition();
     };
 
-    this.overlap= function(){
-        return $(".enemy").overlap({
-            element: Player.htmlElement ,
-            mark: "red"
-        });
-    };
+    
     
     this.updatePosition= function() {
         // assign x and y coordinate to html top and left properities

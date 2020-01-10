@@ -1,27 +1,15 @@
+import {initializegame , enemyCrash , hitEndpoint} from "./functions.js"
 import Controller from "./Controller.js";
 import Player from "./Player.js";
 import Enviroment from "./Enviroment.js";
 import Enemy from "./Enemies.js";
-// import  "./js/jquery.overlap.min.js";
 
 const Enemy1 = new Enemy("first");
 const Enemy2 = new Enemy("second",20,20,200,150,2,1,2);
 const Enemy3 = new Enemy("third",20,20,50,50,3,2,3);
 
-
-
-Player.velocity.y = 0;
-
-function initializegame(layoutNumber=1){
-    Enviroment.createLayout(layoutNumber);
-    Player.position.x = $('#start').position().left + 0.5 * $('#start').width() - 0.5 * Player.width;
-    Player.position.y = $('#start').position().top + $('#start').height() - Player.height;
-    Player.updatePosition();
-
-}
-
 $( document ).ready(function() {
-    initializegame();
+    initializegame($("select#layout").children("option:selected").val());
     $("select#layout").change(function(){
         var selectedlayout = $(this).children("option:selected").val();
         initializegame(selectedlayout);
@@ -48,7 +36,22 @@ function update(){
     Enemy2.moveY();
     Enemy3.moveX();
     // if(Enemy3.overlap()[0]){alert("crash")};
-    
+    if(enemyCrash()[0]){
+        console.log("crash");
+        $('#start-overlay').css({display: "block"});
+        $('select#layout').prop('disabled', false);
+        Player.velocity.x = Player.speed.x;
+        initializegame($("select#layout").children("option:selected").val());
+        return;
+    };
+    if(hitEndpoint()[0]){
+        console.log("win");
+        $('#start-overlay').css({display: "block"});
+        $('select#layout').prop('disabled', false);
+        Player.velocity.x = Player.speed.x;
+        initializegame($("select#layout").children("option:selected").val());
+        return;
+    };
  
     
     if(Player.bouncing){
@@ -71,14 +74,6 @@ function update(){
         Player.htmlElement.removeClass("flipped");    
     }
 
-    $("#top").text(Player.collision.top);
-    $("#bottom").text(Player.collision.bottom);
-    $("#left").text(Player.collision.left);
-    $("#right").text(Player.collision.right);
-    $("#jump").text(Player.jumping);
-    $("#move").text(Player.moving);
-    $("#bounce").text(Player.bouncing);
-    $("#slide").text(Player.sliding);
     $("#Vx").text(parseInt(Player.velocity.x));
     $("#Vy").text(parseInt(Player.velocity.y));
     $("#X").text(parseInt(Player.position.x));
@@ -92,8 +87,9 @@ function update(){
 // listening for jump key press
 window.addEventListener("keydown" ,Controller.keyListner )
 // on start button click start requesting animation frame
-$('#start-btn').on('click', function(){
+$('#start-btn').on('mouseup', function(){
     $('#start-overlay').css({display: "none"});
+    $('select#layout').prop('disabled', true);
     window.requestAnimationFrame(update);
 })
 
