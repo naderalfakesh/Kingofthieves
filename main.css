@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     border: none;
+    overflow: hidden;
 }
 
 #walls{
@@ -11,7 +12,39 @@ body{
     margin: 0 auto;
     background-image: url("./img/grassCenter.png");
     background-repeat: repeat;
+    position: relative;
     
+}
+#start-overlay{
+    position: absolute;
+    background-color: rgba(0,0,0,0.5);
+    width: 600px;
+    height: 300px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+#start-btn{
+    display: block;
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+#start-btn:hover{
+    background-color: rgba(0,0,0,0.5); 
+    /* color: black;  */
+    border: 5px solid #4CAF50;
 }
 
 #frame{
@@ -54,7 +87,7 @@ body{
     width: 20px;
     left: 200px;
     top: 280px;
-    /* border-radius: 50%; */
+    border-radius: 50%;
     position: absolute;
     background: url('./img/css_sprites.png')  no-repeat left center ;
     background-size: cover ;
@@ -99,6 +132,18 @@ body{
     background-color: darkgreen; 
 }
 
+#start{
+    background-image: url(img/windowKodluyoruz.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom ;
+}
+#finish{
+    background-image: url(img/signExitInsider.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom center;
+ }
 
 
  /* first row */

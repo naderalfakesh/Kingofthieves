@@ -35,11 +35,13 @@ const Enemy = function (
         y: -4.5
     };
 
+
     this.createHtmlEnemy = function(){
         $('<div>', {class: "enemy" , id: this.id} )
         .css({height: this.height, width: this.width ,left: this.position.x ,top: this.position.y })
         .appendTo(Enviroment.$frame);
     }
+    this.createHtmlEnemy();
 
     this.htmlElement= $(".enemy");
     this.class="enemy";

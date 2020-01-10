@@ -1,56 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="./main.css">
-    <script src="./js/jquery.min.js"></script>
-    
-    
-</head>
-<body>
-    <div id="walls">
-        <div id="frame">
-            <div id="player" class="move flipped "></div>
-            <!-- <div id="first" class="enemy"></div> -->
-            <!-- blocks will be incected from JS side -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <link rel="stylesheet" href="./main.css" />
+        <script src="./js/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="walls">
+            <div id="start-overlay">
+                <button id="start-btn">Start</button>
+            </div>
+                <div id="frame">
+                    <div id="player" class="move"></div>
+                    <div id="start" class="cell-41"></div>
+                    <div id="finish" class="cell-47"></div>
+                    <!-- <div id="first" class="enemy"></div> -->
+                    <!-- blocks will be incected from JS side -->
+                </div>
         </div>
-    </div>
-    <div>
-        <table>
-            <tr>
-                <th>top</th>
-                <th>btm</th>
-                <th>lft</th>
-                <th>rght</th>
-                <th>jump</th>
-                <th>move</th>
-                <th>bounce</th>
-                <th>slide</th>
-                <th>Vx</th>
-                <th>Vy</th>
-                <th>X</th>
-                <th>Y</th>
-            </tr>
-            <tr>
-                <td id="top"> </td>
-                <td id="bottom"> </td>
-                <td id="left"> </td>
-                <td id="right"> </td>
-                <td id="jump"> </td>
-                <td id="move"> </td>
-                <td id="bounce"> </td>
-                <td id="slide"> </td>
-                <td id="Vx"> </td>
-                <td id="Vy"> </td>
-                <td id="X"> </td>
-                <td id="Y"> </td>
-            </tr>
-        </table>
-    </div>
-    
-    <script src="./main.js" type="module"></script>
-</body>
+        <div>
+            <table>
+                <tr>
+                    <!-- <th>top</th>
+                    <th>btm</th>
+                    <th>lft</th>
+                    <th>rght</th>
+                    <th>jump</th>
+                    <th>move</th>
+                    <th>bounce</th>
+                    <th>slide</th> -->
+                    <th>Vx</th>
+                    <th>Vy</th>
+                    <th>X</th>
+                    <th>Y</th>
+                </tr>
+                <tr>
+                    <!-- <td id="top"></td>
+                    <td id="bottom"></td>
+                    <td id="left"></td>
+                    <td id="right"></td>
+                    <td id="jump"></td>
+                    <td id="move"></td>
+                    <td id="bounce"></td>
+                    <td id="slide"></td> -->
+                    <td id="Vx"></td>
+                    <td id="Vy"></td>
+                    <td id="X"></td>
+                    <td id="Y"></td>
+                </tr>
+            </table>
+            <select name="layout" id="layout" size="5">
+                <option value="1" selected >Layout 1</option>
+                <option value="2">Layout 2</option>
+                <option value="3">Layout 3</option>
+                <option value="4">Layout 4</option>
+                <option value="5" >Layout 5</option>
+            </select>
+        </div>
+
+        <script src="./main.js" type="module"></script>
+    </body>
 </html>

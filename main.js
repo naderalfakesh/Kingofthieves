@@ -7,17 +7,25 @@ import Enemy from "./Enemies.js";
 const Enemy1 = new Enemy("first");
 const Enemy2 = new Enemy("second",20,20,200,150,2,1,2);
 const Enemy3 = new Enemy("third",20,20,50,50,3,2,3);
-Enemy1.createHtmlEnemy();
-Enemy2.createHtmlEnemy();
-Enemy3.createHtmlEnemy();
 
-Player.position.x = 1;
-Player.position.y = 190;
+
+
 Player.velocity.y = 0;
 
+function initializegame(layoutNumber=1){
+    Enviroment.createLayout(layoutNumber);
+    Player.position.x = $('#start').position().left + 0.5 * $('#start').width() - 0.5 * Player.width;
+    Player.position.y = $('#start').position().top + $('#start').height() - Player.height;
+    Player.updatePosition();
 
-Enviroment.start();
-Enviroment.fillBlocks();
+}
+
+$( document ).ready(function() {
+    initializegame();
+    $("select#layout").change(function(){
+        var selectedlayout = $(this).children("option:selected").val();
+        initializegame(selectedlayout);
+    });
 
 function update(){
 
@@ -83,5 +91,11 @@ function update(){
 
 // listening for jump key press
 window.addEventListener("keydown" ,Controller.keyListner )
-// requesting animation frame
-window.requestAnimationFrame(update);
+// on start button click start requesting animation frame
+$('#start-btn').on('click', function(){
+    $('#start-overlay').css({display: "none"});
+    window.requestAnimationFrame(update);
+})
+
+
+});
