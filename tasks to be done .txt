@@ -1,0 +1,4 @@
+1. after crash or win show restart button instead of start. 
+2. after crash or win when change layout show start button instead of restart. 
+4. initialize enemies regarding to layouts. 
+5. add new types of enemies. 
