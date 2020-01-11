@@ -4,7 +4,10 @@ const Controller = {
         if(event.code == "Space" || event.code == "ArrowUp" ){
             Controller.keyPressed = true;
         }
-    }
+    },
+    touchListner: function(event){
+            Controller.keyPressed = true;
+    },
 }
 
 export default Controller;

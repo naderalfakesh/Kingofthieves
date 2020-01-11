@@ -1,12 +1,15 @@
 const Enviroment = {
     $frame: $("#frame"),
+    playing: false,
+    win: false, 
+    loose: false, 
     gravity: { x: 0, y: 0.15 },
     friction: {
         air: { x: 0.99, y: 0.99 },
         ground: { x: 0, y: -0.8 }
     },
     blocks: [],
-    createLayout: function(n=4){
+    createLayout: function(n=1){
         this.grid = this.layouts[n];
         this.start();
         this.fillBlocks();

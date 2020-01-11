@@ -86,8 +86,11 @@ function update(){
 
 // listening for jump key press
 window.addEventListener("keydown" ,Controller.keyListner )
+window.addEventListener("touchend" ,Controller.touchListner )
 // on start button click start requesting animation frame
 $('#start-btn').on('mouseup', function(){
+    Controller.keyPressed = false;
+    Enviroment.playing = true;
     $('#start-overlay').css({display: "none"});
     $('select#layout').prop('disabled', true);
     window.requestAnimationFrame(update);
