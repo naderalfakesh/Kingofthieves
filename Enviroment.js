@@ -1,42 +1,43 @@
 const Enviroment = {
     $frame: $("#frame"),
     playing: false,
-    win: false, 
-    loose: false, 
+    win: false,
+    loose: false,
     gravity: { x: 0, y: 0.15 },
     friction: {
         air: { x: 0.99, y: 0.99 },
         ground: { x: 0, y: -0.8 }
     },
     blocks: [],
-    createLayout: function(n=1){
+    createLayout: function(n = 1) {
         this.grid = this.layouts[n];
         this.start();
         this.fillBlocks();
     },
     start: function() {
-        $( "div.block" ).remove();
+        $("div.block").remove();
         for (let row = 0; row <= 3; row++) {
             for (let column = 0; column <= 6; column++) {
-                if (this.grid[row][column]==1) {
+                if (this.grid[row][column] == 1) {
                     this.$frame.append(
                         $("<div>", {
                             class: `block cell-${row + 1}${column + 1}`
                         })
                     );
-                }
-                else if(this.grid[row][column]=="s"){
-                    $('#start').removeClass().addClass(`cell-${row + 1}${column + 1}`)
-                }
-                else if(this.grid[row][column]=="f"){
-                    $('#finish').removeClass().addClass(`cell-${row + 1}${column + 1}`)
-
+                } else if (this.grid[row][column] == "s") {
+                    $("#start")
+                        .removeClass()
+                        .addClass(`cell-${row + 1}${column + 1}`);
+                } else if (this.grid[row][column] == "f") {
+                    $("#finish")
+                        .removeClass()
+                        .addClass(`cell-${row + 1}${column + 1}`);
                 }
             }
         }
     },
     fillBlocks: function() {
-        this.blocks= [];
+        this.blocks = [];
         const blocks = $(".block");
         blocks.each((index, block) => {
             this.blocks.push({
@@ -44,43 +45,196 @@ const Enviroment = {
                 top: $(block).position().top,
                 left: $(block).position().left,
                 width: $(block).width(),
-                height: $(block).height(),
-            })
+                height: $(block).height()
+            });
         });
     },
+    
     grid: [],
-    layouts:{
+    layouts: {
         1: [
             [0, 0, 0, 0, 0, 0, "f"],
-            [0, 1, 1, 0, 1, 1, 0], 
+            [0, 1, 1, 0, 1, 1, 0],
             [0, 1, 0, 0, 0, 1, 0],
             ["s", 0, 0, 1, 0, 0, 0]
         ],
         2: [
             [0, 0, 0, 1, 0, "f", 0],
-            [0, 1, 0, 0, 0, 1, 0], 
+            [0, 1, 0, 0, 0, 1, 0],
             ["s", 0, 0, 1, 0, 0, 0],
             [0, 1, 0, 0, 0, 1, 0]
         ],
         3: [
             [0, 0, 0, 1, 0, 1, "f"],
-            ["s", 1, 0, 0, 0, 1, 0], 
+            ["s", 1, 0, 0, 0, 1, 0],
             [0, 1, 0, 1, 0, 1, 0],
             [0, 1, 0, 0, 0, 0, 0]
         ],
         4: [
             [0, 0, 0, 0, 0, 0, 0],
-            [0, 1, 1, 0, 1, 1, 0], 
+            [0, 1, 1, 0, 1, 1, 0],
             [0, 1, 1, "f", 1, 1, 0],
             [0, "s", 0, 0, 0, 0, 0]
         ],
         5: [
             [0, 0, 1, 0, "f", 0, 0],
-            [1, 0, 0, 0, 1, 0, 0], 
+            [1, 0, 0, 0, 1, 0, 0],
             [0, 0, 1, 0, 0, 0, 1],
             [0, "s", 0, 0, 1, 0, 0]
-        ],
+        ]
+    },
+    enemies: {
+        1: [
+            {
+                type: "circular",
+                id: "circular",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            },
+            {
+                type: "vertical",
+                id: "vertical",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            },
+            {
+                type: "horizontal",
+                id: "horizontal",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            }
 
+        ],
+        2: [
+            {
+                type: "circular",
+                id: "circular",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            },
+            {
+                type: "vertical",
+                id: "vertical",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            },
+            {
+                type: "horizontal",
+                id: "horizontal",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            }
+
+        ],
+        3: [
+            {
+                type: "circular",
+                id: "circular",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            },
+            {
+                type: "vertical",
+                id: "vertical",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            },
+            {
+                type: "horizontal",
+                id: "horizontal",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            }
+
+        ],
+        4: [
+            {
+                type: "circular",
+                id: "circular",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            },
+            {
+                type: "vertical",
+                id: "vertical",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            },
+            {
+                type: "horizontal",
+                id: "horizontal",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            }
+
+        ],
+        5: [
+            {
+                type: "circular",
+                id: "circular",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            },
+            {
+                type: "vertical",
+                id: "vertical",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            },
+            {
+                type: "horizontal",
+                id: "horizontal",
+                height: 20,
+                width: 20,
+                column: 1,
+                row: 1,
+                blockSpan: 1
+            }
+
+        ],
+        
     }
 };
 

@@ -4,6 +4,7 @@ import  "./js/jquery.overlap.min.js";
 
 
 
+
 function initializegame(layoutNumber=1){
     Enviroment.createLayout(layoutNumber);
     Player.position.x = $('#start').position().left + 0.5 * $('#start').width() - 0.5 * Player.width;
@@ -13,8 +14,8 @@ function initializegame(layoutNumber=1){
 
 function enemyCrash(){
     return $(".enemy").overlap({
-        element: Player.htmlElement ,
-        mark: "red"
+        element: Player.htmlElement 
+        // mark: "red"
     });
     
 
@@ -22,9 +23,9 @@ function enemyCrash(){
 
 function hitEndpoint(){
     return $("#finish").overlap({
-        element: Player.htmlElement ,
-        mark: "red"
+        element: Player.htmlElement
+        // mark: "red"
     });
 };
 
-export {initializegame , enemyCrash , hitEndpoint};
+export {initializegame , enemyCrash , hitEndpoint };

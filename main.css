@@ -1,10 +1,11 @@
+html{
+    zoom: 175%;
+}
 body{
     margin: 0;
     padding: 0;
     border: none;
     overflow: hidden;
-
-    
 }
 
 #walls{
@@ -26,6 +27,24 @@ body{
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
+}
+
+#message{
+    position: absolute;
+    width: 300px;
+    height: 250px;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -30%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 5px 30px;
+}
+#message h1{
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+
 }
 #start-overlay button{
     display: block;
@@ -55,34 +74,21 @@ select#layout{
     border: 3px solid navy;
     color: white;
     font-size: 20px;
-    width: 150px;
+    width: 110px;
     height: 50px;
     position: absolute;
     left: 0%;
     top: 100%;
     transform: translate(0%, -100%);
 }
+select#layout:hover{
+    background-color: navy;
 
+}
 select#layout option{
     background-color: rgba(0, 0, 128, 0.5);
-    color: rgba(0, 78, 0, 0.4)
+    color: rgb(255, 255, 255)
 }
-/* #layout-btns{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 20px;
-    justify-items: center;
-    margin-top: 20px;
-}
-
-#layout-btns button{
-    position: relative;
-    border: 2px solid rgb(76, 94, 175);
-}
-
-#layout-btns button:hover{
-    background-color: rgb(76, 94, 175);
-} */
 
 #frame{
     background-color: white;
@@ -117,6 +123,16 @@ select#layout option{
     background-repeat: no-repeat;
     background-size: cover;
 }
+span#playericon{
+    height: 20px;
+    width: 20px;
+    background: url('./img/css_sprites.png')  no-repeat left center ;
+    background-size: cover ;
+    display: inline-block;
+    animation: play 1s steps(8) infinite;
+    margin: -5px 3px;
+   
+}
 
 
 #player{
@@ -132,9 +148,7 @@ select#layout option{
 }
 
 
-#player.idle { 
-    background-position: 0px 0px;
- }
+
 #player.flipped { 
     -moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
@@ -159,14 +173,15 @@ select#layout option{
     width: 20px;
     left: 0px;
     top: 0px;
+    border-radius: 50%;
 }
-.enemy#first{
+.enemy#circular{
     background-color: blueviolet; 
 }
-.enemy#second{
+.enemy#vertical{
     background-color: cornflowerblue; 
 }
-.enemy#third{
+.enemy#horizontal{
     background-color: darkgreen; 
 }
 
