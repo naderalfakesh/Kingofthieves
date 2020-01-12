@@ -27,27 +27,62 @@ body{
     transform: translate(-50%, -50%);
     z-index: 1;
 }
-#start-btn{
+#start-overlay button{
     display: block;
     position: absolute;
-    width: 200px;
-    height: 100px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #4CAF50;
+    width: 100px;
+    height: 50px;
+    background-color: rgba(0,0,0,0.1);
     color: white;
-    border: none;
-    font-size: 30px;
+    font-size: 20px;
     text-transform: uppercase;
     cursor: pointer;
 }
 
-#start-btn:hover{
-    background-color: rgba(0,0,0,0.5); 
-    /* color: black;  */
-    border: 5px solid #4CAF50;
+#start-btn{
+    left: 100%;
+    top: 100%;
+    transform: translate(-100%, -100%);
+    border: 2px solid navy;
 }
+
+#start-btn:hover{
+    background-color: navy;
+}
+
+select#layout{
+    background-color: rgba(0,0,0,0.1);
+    border: 3px solid navy;
+    color: white;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    left: 0%;
+    top: 100%;
+    transform: translate(0%, -100%);
+}
+
+select#layout option{
+    background-color: rgba(0, 0, 128, 0.5);
+    color: rgba(0, 78, 0, 0.4)
+}
+/* #layout-btns{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+#layout-btns button{
+    position: relative;
+    border: 2px solid rgb(76, 94, 175);
+}
+
+#layout-btns button:hover{
+    background-color: rgb(76, 94, 175);
+} */
 
 #frame{
     background-color: white;

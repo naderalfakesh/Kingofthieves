@@ -12,6 +12,20 @@
         <div id="walls">
             <div id="start-overlay">
                 <button id="start-btn">Start</button>
+                <select name="layout" id="layout" class="disabled">
+                    <option value="1" selected >Layout 1</option>
+                    <option value="2">Layout 2</option>
+                    <option value="3">Layout 3</option>
+                    <option value="4">Layout 4</option>
+                    <option value="5" >Layout 5</option>
+                </select>
+                <!-- <div id="layout-btns">
+                    <button id="map1">map 1</button>
+                    <button id="map2">map 2</button>
+                    <button id="map3">map 3</button>
+                    <button id="map4">map 4</button>
+                    <button id="map5">map 5</button>
+                </div> -->
             </div>
                 <div id="frame">
                     <div id="player" class="move"></div>
@@ -52,13 +66,7 @@
                     <td id="Y"></td>
                 </tr>
             </table>
-            <select name="layout" id="layout" class="disabled" size="5">
-                <option value="1" selected >Layout 1</option>
-                <option value="2">Layout 2</option>
-                <option value="3">Layout 3</option>
-                <option value="4">Layout 4</option>
-                <option value="5" >Layout 5</option>
-            </select>
+            
         </div>
 
         <script src="./main.js" type="module"></script>
