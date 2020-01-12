@@ -6,8 +6,8 @@ const blockheight = Enviroment.$frame.height() / 4;
 
 const Enemy = function(
     id = "circular",
-    height = 20,
-    width = 20,
+    height= 16,
+    width= 20,
     column = 1,
     row = 1,
     blockSpan = 1

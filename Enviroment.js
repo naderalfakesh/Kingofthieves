@@ -50,7 +50,7 @@ const Enviroment = {
             });
         });
     },
-    
+
     grid: [],
     layouts: {
         1: [
@@ -89,7 +89,7 @@ const Enviroment = {
         1: [
             {
                 id: "circular",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 3,
                 row: 1,
@@ -97,7 +97,7 @@ const Enviroment = {
             },
             {
                 id: "vertical",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 4,
                 row: 1,
@@ -105,18 +105,17 @@ const Enviroment = {
             },
             {
                 id: "horizontal",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 1,
                 row: 1,
                 blockSpan: 3
             }
-
         ],
         2: [
             {
                 id: "circular",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 3,
                 row: 1,
@@ -124,7 +123,7 @@ const Enviroment = {
             },
             {
                 id: "vertical",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 5,
                 row: 1,
@@ -132,18 +131,17 @@ const Enviroment = {
             },
             {
                 id: "horizontal",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 1,
                 row: 1,
                 blockSpan: 3
             }
-
         ],
         3: [
             {
                 id: "circular",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 3,
                 row: 2,
@@ -151,7 +149,7 @@ const Enviroment = {
             },
             {
                 id: "vertical",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 3,
                 row: 2,
@@ -159,18 +157,17 @@ const Enviroment = {
             },
             {
                 id: "horizontal",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 1,
                 row: 1,
                 blockSpan: 5
             }
-
         ],
         4: [
             {
                 id: "circular",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 4,
                 row: 1,
@@ -178,7 +175,7 @@ const Enviroment = {
             },
             {
                 id: "vertical",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 7,
                 row: 1,
@@ -186,18 +183,17 @@ const Enviroment = {
             },
             {
                 id: "horizontal",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 1,
                 row: 1,
                 blockSpan: 7
             }
-
         ],
         5: [
             {
                 id: "circular",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 2,
                 row: 2,
@@ -205,7 +201,7 @@ const Enviroment = {
             },
             {
                 id: "vertical",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 4,
                 row: 1,
@@ -213,15 +209,13 @@ const Enviroment = {
             },
             {
                 id: "horizontal",
-                height: 20,
+                height: 16,
                 width: 20,
                 column: 1,
                 row: 1,
                 blockSpan: 2
             }
-
-        ],
-        
+        ]
     }
 };
 

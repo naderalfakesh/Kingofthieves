@@ -190,24 +190,24 @@ span#playericon{
 
 .enemy{ 
     position: absolute;
-    height: 20px;
+    height: 16px;
     width: 20px;
     left: 0px;
     top: 0px;
-    /* background: url('./img/Flying_Monster.png')  no-repeat left center ;
-    background-size: cover ; */
+    background: url('./img/Flying_Monster.png')  no-repeat left center ;
+    background-size: cover ;
+    animation: enemyplay 1s steps(8) infinite;
     /* border-radius: 50%; */
-    /* animation: enemyplay 1s steps(8) infinite; */
 }
 
-/* @keyframes enemyplay {
-    100% { background-position: -160px 0; }
- } */
+@keyframes enemyplay {
+    100% { background-position: -157px 0; }
+ }
 
  
 
 
-.enemy#circular{
+/* .enemy#circular{
     background-color: blueviolet; 
 }
 .enemy#vertical{
@@ -215,7 +215,7 @@ span#playericon{
 }
 .enemy#horizontal{
     background-color: darkgreen; 
-}
+} */
 
 #start{
     background-image: url(img/windowKodluyoruz.png);
