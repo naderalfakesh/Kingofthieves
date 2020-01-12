@@ -194,8 +194,19 @@ span#playericon{
     width: 20px;
     left: 0px;
     top: 0px;
-    border-radius: 50%;
+    /* background: url('./img/Flying_Monster.png')  no-repeat left center ;
+    background-size: cover ; */
+    /* border-radius: 50%; */
+    /* animation: enemyplay 1s steps(8) infinite; */
 }
+
+/* @keyframes enemyplay {
+    100% { background-position: -160px 0; }
+ } */
+
+ 
+
+
 .enemy#circular{
     background-color: blueviolet; 
 }

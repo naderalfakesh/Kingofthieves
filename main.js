@@ -7,10 +7,7 @@ import {verticalMover,HorizontalMover,circularMover} from "./Enemies.js";
 
 
 $( document ).ready(function() {
-    // create enemies
-    const Enemy1 = new circularMover("circular",20,20,2,2,4);
-    const Enemy2 = new verticalMover("vertical",20,20,2,1,2);
-    const Enemy3 = new HorizontalMover("horizontal",20,20,3,2,3);
+    
 
     // get selected layout
     const selectedlayout = $("select#layout").children("option:selected").val();
@@ -20,7 +17,22 @@ $( document ).ready(function() {
     $("select#layout").change(function(){
         var selectedlayout = $(this).children("option:selected").val();
         initializegame(selectedlayout);
+        const E1=Enviroment.enemies[0];
+        const E2=Enviroment.enemies[1];
+        const E3=Enviroment.enemies[2];
+        Enemy1.update(E1.column,E1.row,E1.blockSpan);
+        Enemy2.update(E2.column,E2.row,E2.blockSpan);
+        Enemy3.update(E3.column,E3.row,E3.blockSpan);
     });
+
+    // create enemies
+    const E1=Enviroment.enemies[0];
+    const E2=Enviroment.enemies[1];
+    const E3=Enviroment.enemies[2];
+    
+    const Enemy1 = new circularMover(E1.id,E1.height,E1.width,E1.column,E1.row,E1.blockSpan);
+    const Enemy2 = new verticalMover(E2.id,E2.height,E2.width,E2.column,E2.row,E2.blockSpan);
+    const Enemy3 = new HorizontalMover(E3.id,E3.height,E3.width,E3.column,E3.row,E3.blockSpan);
 
 function update(){
 
@@ -47,11 +59,12 @@ function update(){
         $('#start-overlay').css({display: "block"});
         $('select#layout').prop('disabled', false);
         Player.velocity.x = Player.speed.x;
-        $("#start-overlay").css({"background-color": "rgba(255,0,0,0.2)"})
+        $("#message").css({"background-color": "rgba(255,0,0,0.5)"})
+        $("#message h1").text("!! Sorry you lost !!");
         initializegame($("select#layout").children("option:selected").val());
-        Enemy1.updateHtmlEnemy();
-        Enemy2.updateHtmlEnemy();
-        Enemy3.updateHtmlEnemy();
+        Enemy1.reset();
+        Enemy2.reset();
+        Enemy3.reset();
         return;
     };
 
@@ -59,11 +72,12 @@ function update(){
         $('#start-overlay').css({display: "block"});
         $('select#layout').prop('disabled', false);
         Player.velocity.x = Player.speed.x;
-        $("#start-overlay").css({"background-color": "rgba(0, 78, 0, 0.4)"})
+        $("#message").css({"background-color": "rgba(0, 255, 0, 0.4)"})
+        $("#message h1").text("! Congrats you won !");
         initializegame($("select#layout").children("option:selected").val());
-        Enemy1.updateHtmlEnemy();
-        Enemy2.updateHtmlEnemy();
-        Enemy3.updateHtmlEnemy();
+        Enemy1.reset();
+        Enemy2.reset();
+        Enemy3.reset();
         return;
     };
  

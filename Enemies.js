@@ -20,35 +20,65 @@ const Enemy = function(
         y: row
     };
     this.blocknum = blockSpan;
-    
+
     this.velocity = {
         x: 2.2,
         y: -4.5
     };
-    
-    const xPosition = (this.initialBlockPosition.x - 1) * blockWidth +
+
+    this.initialPositionX = (this.initialBlockPosition.x - 1) * blockWidth +
     (0.5 * blockWidth - 0.5 * this.width);
-    const yPosition = (this.initialBlockPosition.y - 1) * blockheight +
+
+    this.initialPositionY = (this.initialBlockPosition.y - 1) * blockheight +
     (0.5 * blockheight - 0.5 * this.height);
+
+
     this.position = {
-        x: xPosition,
-        y: yPosition
+        x: this.initialPositionX,
+        y: this.initialPositionY
     };
+
     this.createHtmlEnemy = function() {
         $("<div>", { class: "enemy", id: this.id })
             .css({
                 height: this.height,
                 width: this.width,
-                left: this.position.x,
-                top: this.position.y
+                left: this.initialPositionX,
+                top: this.initialPositionY
             })
             .appendTo(Enviroment.$frame);
     };
-    this.updateHtmlEnemy = function() {
+    this.reset = function() {
         $("#" + this.id).css({
-            left: xPosition + "px",
-            top: yPosition + "px"
+            left: this.initialPositionX + "px",
+            top: this.initialPositionY + "px"
         });
+
+    };
+
+    this.update = function(
+        column = 1,
+        row = 1,
+        blockSpan = 1
+    ) {
+        this.initialBlockPosition = {
+            x: column,
+            y: row
+        };
+        this.blocknum = blockSpan;
+
+        this.initialPositionX =
+            (this.initialBlockPosition.x - 1) * blockWidth +
+            (0.5 * blockWidth - 0.5 * this.width);
+        this.initialPositionY =
+            (this.initialBlockPosition.y - 1) * blockheight +
+            (0.5 * blockheight - 0.5 * this.height);
+        this.position = {
+            x: this.initialPositionX,
+            y: this.initialPositionY
+        };
+
+        this.reset();
     };
 
     this.htmlElement = $(".enemy");
@@ -117,7 +147,7 @@ function circularMover(id, height, width, column, row, blockSpan) {
 
         // Reset the angle after 360 degree turn
         if (this.angle >= Math.PI * 2) this.angle = 0;
-        this.angle += 1.5 * this.angular_speed;
+        this.angle += 1.3 * this.angular_speed;
         this.updatePosition();
     };
 }

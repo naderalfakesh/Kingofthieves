@@ -11,6 +11,7 @@ const Enviroment = {
     blocks: [],
     createLayout: function(n = 1) {
         this.grid = this.layouts[n];
+        this.enemies = this.enemyList[n];
         this.start();
         this.fillBlocks();
     },
@@ -83,154 +84,140 @@ const Enviroment = {
             [0, "s", 0, 0, 1, 0, 0]
         ]
     },
-    enemies: {
+    enemies: [],
+    enemyList: {
         1: [
             {
-                type: "circular",
                 id: "circular",
                 height: 20,
                 width: 20,
-                column: 1,
+                column: 3,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 3
             },
             {
-                type: "vertical",
                 id: "vertical",
                 height: 20,
                 width: 20,
-                column: 1,
+                column: 4,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 3
             },
             {
-                type: "horizontal",
                 id: "horizontal",
                 height: 20,
                 width: 20,
                 column: 1,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 3
             }
 
         ],
         2: [
             {
-                type: "circular",
                 id: "circular",
                 height: 20,
                 width: 20,
-                column: 1,
+                column: 3,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 3
             },
             {
-                type: "vertical",
                 id: "vertical",
                 height: 20,
                 width: 20,
-                column: 1,
+                column: 5,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 5
             },
             {
-                type: "horizontal",
                 id: "horizontal",
                 height: 20,
                 width: 20,
                 column: 1,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 3
             }
 
         ],
         3: [
             {
-                type: "circular",
                 id: "circular",
                 height: 20,
                 width: 20,
-                column: 1,
-                row: 1,
-                blockSpan: 1
+                column: 3,
+                row: 2,
+                blockSpan: 2
             },
             {
-                type: "vertical",
                 id: "vertical",
                 height: 20,
                 width: 20,
-                column: 1,
-                row: 1,
-                blockSpan: 1
+                column: 3,
+                row: 2,
+                blockSpan: 3
             },
             {
-                type: "horizontal",
                 id: "horizontal",
                 height: 20,
                 width: 20,
                 column: 1,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 5
             }
 
         ],
         4: [
             {
-                type: "circular",
                 id: "circular",
                 height: 20,
                 width: 20,
-                column: 1,
+                column: 4,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 4
             },
             {
-                type: "vertical",
                 id: "vertical",
                 height: 20,
                 width: 20,
-                column: 1,
+                column: 7,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 4
             },
             {
-                type: "horizontal",
                 id: "horizontal",
                 height: 20,
                 width: 20,
                 column: 1,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 7
             }
 
         ],
         5: [
             {
-                type: "circular",
                 id: "circular",
                 height: 20,
                 width: 20,
-                column: 1,
-                row: 1,
-                blockSpan: 1
+                column: 2,
+                row: 2,
+                blockSpan: 2
             },
             {
-                type: "vertical",
                 id: "vertical",
                 height: 20,
                 width: 20,
-                column: 1,
+                column: 4,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 3
             },
             {
-                type: "horizontal",
                 id: "horizontal",
                 height: 20,
                 width: 20,
                 column: 1,
                 row: 1,
-                blockSpan: 1
+                blockSpan: 2
             }
 
         ],
