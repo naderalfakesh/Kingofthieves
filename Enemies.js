@@ -45,7 +45,6 @@ const Enemy = function(
             .appendTo(Enviroment.$frame);
     };
     this.updateHtmlEnemy = function() {
-        console.log("updatehtmlenemy")
         $("#" + this.id).css({
             left: xPosition + "px",
             top: yPosition + "px"

@@ -1,6 +1,27 @@
-html{
-    zoom: 175%;
+@media (min-width: 1100px){
+    html{
+        zoom: 175%;
+    }
 }
+@media (max-width: 1100px) and (min-width: 975px){
+    html{
+        zoom: 150%;
+    }
+}
+@media (max-width: 975px) and (min-width: 775px){
+    html{
+        zoom: 120%;
+    }
+}
+
+
+@media (max-width: 450px) {
+    html{
+        zoom: 50%;
+    }
+}
+
+
 body{
     margin: 0;
     padding: 0;
