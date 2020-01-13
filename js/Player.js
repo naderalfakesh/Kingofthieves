@@ -82,7 +82,7 @@ const Player = {
         }
     },
 
-    jump: function() {
+    jump: function() { // when jump triggered add velocity on Y axis
         if (!this.jumping || this.sliding) {
             this.jumping = true;
             this.velocity.y = this.speed.y;
@@ -91,22 +91,24 @@ const Player = {
             }
         }
     },
-    slide: function() {
+
+    slide: function() { // If player is sliding on walls set velocity to downward and reduce speed by friction
             this.velocity.y = -this.speed.y;
         this.position.y += this.velocity.y * Enviroment.friction.ground.y;
         
     },
 
-    bounce: function() {
+    bounce: function() {// bouncing from walls to opposit direction
         this.velocity.x = -this.velocity.x;
         this.sliding = false;
         this.bouncing = true;
     },
 
-    collisionCheck: function() {
+    collisionCheck: function() {// general collision detection
 
-        const blockcoll = this.blocksCollision();
+        const blockcoll = this.blocksCollision(); // detect collision with blocks
         
+        // detect collision with frame walls 
         const bottom =
             this.position.y >=
              Enviroment.$frame.height() - this.htmlElement.height() ;
@@ -119,123 +121,111 @@ const Player = {
             this.position.x >=
          Enviroment.$frame.width() - this.htmlElement.width();
 
+         // set collision global variable
         this.collision.top = blockcoll.top || top;
         this.collision.left = blockcoll.left || left;
         this.collision.bottom = blockcoll.bottom || bottom;
         this.collision.right = blockcoll.right || right;
-        if (left) {
+        
+        if (left) {// reset position on collision 
             this.position.x = 0;
         }
-        if (right) {
+        if (right) {// reset position on collision 
             this.position.x = Enviroment.$frame.width() - this.htmlElement.width();
         }
-        if (bottom) {
+        if (bottom) {// reset position on collision 
             this.position.y = Enviroment.$frame.height() - this.htmlElement.height() ;
         }
-        if (this.collision.top) {
+        if (this.collision.top) { // bounce from top downward
             this.velocity.y = - 0.3*this.speed.y;
         }
-        if (this.collision.bottom) {
+        if (this.collision.bottom) { // detect jump and slide finish point
             this.jumping = false;
             this.sliding = false;
         }
-        if (
+        if (// detect sliding moment 
             (this.collision.left || this.collision.right) &&
             (this.jumping || !this.collision.bottom) &&
             this.velocity.y >= 0
         ) {
             this.sliding = true;
         }
+
+        // detect sliding finish point of block when the edge is on the air 
         if(!(this.collision.left || this.collision.right) && this.sliding){
             this.sliding = false;
             this.velocity.y =  -0.2*this.speed.y;
         }
     },
-    blocksCollision: function() {
+
+    blocksCollision: function() {// detect collisoin with blocks
         let result = { top: false, left: false, bottom: false, right: false };
-        const xEdge = 2;
-        const yEdge = 5;
+        const xEdge = 2; // tolerance for collision on X axis
+        const yEdge = 5; // tolerance for collision on Y axis
+
+        // player edges for code readiblity purpose
         const playerBottom = this.position.y + this.height;
         const playerRight = this.position.x + this.width;
         const playerTop = this.position.y;
         const playerLeft = this.position.x;
 
-        Enviroment.blocks.forEach((item, i) => {
-            const itemBottom = item.top + item.height;
-            const itemRight = item.left + item.width;
+        // checking every block if it is collidates with player
+        Enviroment.blocks.forEach((block, i) => {
+            const blockBottom = block.top + block.height;
+            const blockRight = block.left + block.width;
 
-            // checking collision between player right and block
+            //player right edge collision with block
             if (
-                playerRight >= item.left &&
-                this.previousPosition.x + this.width < item.left &&
+                playerRight >= block.left &&
+                this.previousPosition.x + this.width < block.left &&
                 this.velocity.x > 0 &&
-                playerBottom-yEdge >= item.top &&
-                playerTop+yEdge <= itemBottom
+                playerBottom-yEdge >= block.top &&
+                playerTop+yEdge <= blockBottom
             ) {
                 result.right = true;
-                this.position.x = item.left - this.width
+                this.position.x = block.left - this.width
             }
 
-            // checking collision between player left and block
+            //player left edge collision with block
             if (
-                playerLeft <= itemRight &&
-                this.previousPosition.x > itemRight &&
+                playerLeft <= blockRight &&
+                this.previousPosition.x > blockRight &&
                 this.velocity.x < 0 &&
-                playerBottom-yEdge >= item.top &&
-                playerTop+yEdge <= itemBottom
+                playerBottom-yEdge >= block.top &&
+                playerTop+yEdge <= blockBottom
             ) {
                 result.left = true;
-                this.position.x = itemRight;
+                this.position.x = blockRight;
 
             }
 
-            // checking collision between player bottom and block
+            //player bottom edge collision with block
             if (
-                playerBottom >= item.top &&
-                this.previousPosition.y + this.height < item.top &&
+                playerBottom >= block.top &&
+                this.previousPosition.y + this.height < block.top &&
                 this.velocity.y > 0 &&
-                playerLeft+xEdge <= item.left + item.width &&
-                playerRight-xEdge >= item.left
+                playerLeft+xEdge <= block.left + block.width &&
+                playerRight-xEdge >= block.left
             ) {
                 result.bottom = true;
-                this.position.y = item.top - this.height;
+                this.position.y = block.top - this.height;
 
             }
             
+            //player top edge collision with block
             if (
-                playerTop <= itemBottom &&
-                this.previousPosition.y > itemBottom &&
+                playerTop <= blockBottom &&
+                this.previousPosition.y > blockBottom &&
                 this.velocity.y < 0 &&
-                playerLeft+xEdge <= item.left + item.width &&
-                playerRight-xEdge >= item.left
+                playerLeft+xEdge <= block.left + block.width &&
+                playerRight-xEdge >= block.left
             ) {
                 result.top = true;
-                this.position.y = itemBottom;
+                this.position.y = blockBottom;
             }
         });
-        return {
-            top: result.top,
-            left: result.left,
-            bottom: result.bottom,
-            right: result.right
-        };
+        return result;
     },
-
-    blockCollisionRight: function(item) {
-        const playerRight = this.position.x + this.width;
-        const playerYCenter = this.position.y + 0.5 * this.height;
-        const itemBottom = item.top + item.height;
-        if (
-            playerRight >= item.left &&
-            this.previousPosition.x + this.width < item.left &&
-            this.velocity.x > 0 &&
-            playerYCenter >= item.top &&
-            playerYCenter <= itemBottom
-        ) {
-            return true;
-        }
-    },
-
 
     updatePosition: function() {
         // assign x and y coordinate to html top and left properities

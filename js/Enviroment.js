@@ -3,19 +3,23 @@ const Enviroment = {
     playing: false,
     win: false,
     loose: false,
+    blocks: [],
+    enemies: [],
+    grid: [],
     gravity: { x: 0, y: 0.15 },
     friction: {
         air: { x: 0.99, y: 0.99 },
         ground: { x: 0, y: -0.8 }
     },
-    blocks: [],
-    createLayout: function(n = 1) {
+
+    createLayout: function(n = 1) { // create the layout according to the passed parameter
         this.grid = this.layouts[n];
         this.enemies = this.enemyList[n];
         this.start();
         this.fillBlocks();
     },
-    start: function() {
+
+    start: function() { // creating the divs of blocks in grid and assign classes to take their places
         $("div.block").remove();
         for (let row = 0; row <= 3; row++) {
             for (let column = 0; column <= 6; column++) {
@@ -37,7 +41,8 @@ const Enviroment = {
             }
         }
     },
-    fillBlocks: function() {
+
+    fillBlocks: function() { // calculating blocks dimentions 
         this.blocks = [];
         const blocks = $(".block");
         blocks.each((index, block) => {
@@ -50,9 +55,8 @@ const Enviroment = {
             });
         });
     },
-
-    grid: [],
-    layouts: {
+    
+    layouts: {  // preset layout grid 0: no block , 1: block , f: finish point , s: starting point
         1: [
             [0, 0, 0, 0, 0, 0, "f"],
             [0, 1, 1, 0, 1, 1, 0],
@@ -84,8 +88,8 @@ const Enviroment = {
             [0, "s", 0, 0, 1, 0, 0]
         ]
     },
-    enemies: [],
-    enemyList: {
+
+    enemyList: { // preset enemy list corresponding to every layout
         1: [
             {
                 id: "circular",
