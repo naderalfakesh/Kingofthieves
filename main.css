@@ -194,7 +194,7 @@ span#playericon{
     width: 20px;
     left: 0px;
     top: 0px;
-    background: url('./img/Flying_Monster.png')  no-repeat left center ;
+    background: url('./img/Flying_Monster_sm.png')  no-repeat left center ;
     background-size: cover ;
     animation: enemyplay 1s steps(8) infinite;
     /* border-radius: 50%; */
