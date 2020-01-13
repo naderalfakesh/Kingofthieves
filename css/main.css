@@ -34,7 +34,7 @@ body{
     width: 650px;
     height: 350px;
     margin: 0 auto;
-    background-image: url("./img/grassCenter.png");
+    background-image: url("../img/grassCenter.png");
     background-repeat: repeat;
     position: relative;
     
@@ -139,7 +139,7 @@ select#layout option{
     padding: 0;
     border: none;
     /* background-color: rgba(1, 124, 63, 0.932); */
-    background-image: url("./img/grassCenter.png");
+    background-image: url("../img/grassCenter.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -147,7 +147,7 @@ select#layout option{
 span#playericon{
     height: 20px;
     width: 20px;
-    background: url('./img/css_sprites.png')  no-repeat left center ;
+    background: url('../img/css_sprites.png')  no-repeat left center ;
     background-size: cover ;
     display: inline-block;
     animation: play 1s steps(8) infinite;
@@ -163,7 +163,7 @@ span#playericon{
     top: 280px;
     border-radius: 50%;
     position: absolute;
-    background: url('./img/css_sprites.png')  no-repeat left center ;
+    background: url('../img/css_sprites.png')  no-repeat left center ;
     background-size: cover ;
     background-position: 0% 5px;
 }
@@ -194,7 +194,7 @@ span#playericon{
     width: 20px;
     left: 0px;
     top: 0px;
-    background: url('./img/Flying_Monster_sm.png')  no-repeat left center ;
+    background: url('../img/Flying_Monster_sm.png')  no-repeat left center ;
     background-size: cover ;
     animation: enemyplay 1s steps(8) infinite;
     /* border-radius: 50%; */
@@ -204,27 +204,15 @@ span#playericon{
     100% { background-position: -157px 0; }
  }
 
- 
-
-
-/* .enemy#circular{
-    background-color: blueviolet; 
-}
-.enemy#vertical{
-    background-color: cornflowerblue; 
-}
-.enemy#horizontal{
-    background-color: darkgreen; 
-} */
 
 #start{
-    background-image: url(img/windowKodluyoruz.png);
+    background-image: url(../img/windowKodluyoruz.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: bottom ;
 }
 #finish{
-    background-image: url(img/signExitInsider.png);
+    background-image: url(../img/signExitInsider.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: bottom center;
@@ -321,18 +309,4 @@ span#playericon{
 }
 .cell-47{
     grid-area: cell-47;
-}
-
-table{
-    margin: 0 auto;
-}
-td,th{
-    padding: 5px 10px;
-}
-th{
-    text-transform: uppercase;
-}
-
-.red{
-    background-color: red !important;
 }

@@ -1,5 +1,4 @@
 import Enviroment from "./Enviroment.js";
-import "./js/jquery.overlap.min.js";
 
 const blockWidth = Enviroment.$frame.width() / 7;
 const blockheight = Enviroment.$frame.height() / 4;

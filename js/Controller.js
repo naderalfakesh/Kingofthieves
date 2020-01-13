@@ -7,7 +7,6 @@ const Controller = {
     },
     touchListner: function(event){
             Controller.keyPressed = true;
-
     },
 }
 

@@ -1,5 +1,4 @@
 import Enviroment from "./Enviroment.js";
-import Controller from "./Controller.js";
 
 const Player = {
     // constants
@@ -73,8 +72,14 @@ const Player = {
                 this.position.x += 0.1*this.velocity.x;
             }
         }
-        // check collision after updating position
-        // this.collisionCheck();
+
+        // Check movement direction and redirect player 
+        if(this.velocity.x < 0){
+            this.htmlElement.addClass("flipped");
+        }
+        else{
+            this.htmlElement.removeClass("flipped");    
+        }
     },
 
     jump: function() {
